@@ -156,5 +156,15 @@ def update_user(id:int,user:User,db:Session=Depends(get_db)):
           users.password=user.password
           db.commit()
           return "user updated"
-
      return "user not found"
+
+
+@app.delete("/users/{id}")
+def delete_user(id:int,db:Session=Depends(get_db)):
+     user=db.query(database_model.User).filter(database_model.User.id==id).first()
+     if user:
+          db.delete(user)
+          db.commit()
+          return "user deleted"
+     return "user not found"
+
