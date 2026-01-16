@@ -15,7 +15,7 @@ app=FastAPI()
 #allow method to access outside in react
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True
@@ -156,4 +156,5 @@ def update_user(id:int,user:User,db:Session=Depends(get_db)):
           users.password=user.password
           db.commit()
           return "user updated"
+
      return "user not found"
